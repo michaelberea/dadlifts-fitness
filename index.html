@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DadLifts - Strength Training for Busy Dads</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+            padding: 80px 20px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            letter-spacing: -1px;
+        }
+
+        .hero .tagline {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            color: #ecf0f1;
+            font-weight: 300;
+        }
+
+        .hero .subtitle {
+            font-size: 1.1rem;
+            margin-bottom: 40px;
+            color: #bdc3c7;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: #e74c3c;
+            color: white;
+            padding: 18px 50px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(231, 76, 60, 0.4);
+        }
+
+        .cta-button:hover {
+            background: #c0392b;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(231, 76, 60, 0.5);
+        }
+
+        /* Problem Section */
+        .problem {
+            padding: 80px 20px;
+            background: #ecf0f1;
+            text-align: center;
+        }
+
+        .problem h2 {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            color: #2c3e50;
+        }
+
+        .problem p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 20px;
+            color: #555;
+        }
+
+        /* Paths Section */
+        .paths {
+            padding: 80px 20px;
+            background: white;
+        }
+
+        .paths h2 {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 60px;
+            color: #2c3e50;
+        }
+
+        .paths-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .path-card {
+            background: #fff;
+            border: 3px solid #ecf0f1;
+            border-radius: 15px;
+            padding: 40px 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .path-card:hover {
+            transform: translateY(-5px);
+            border-color: #e74c3c;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .path-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+        }
+
+        .path-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+
+        .path-card p {
+            color: #666;
+            font-size: 1.05rem;
+            line-height: 1.8;
+        }
+
+        /* How It Works */
+        .how-it-works {
+            padding: 80px 20px;
+            background: #2c3e50;
+            color: white;
+        }
+
+        .how-it-works h2 {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .step {
+            text-align: center;
+        }
+
+        .step-number {
+            display: inline-block;
+            width: 60px;
+            height: 60px;
+            background: #e74c3c;
+            color: white;
+            border-radius: 50%;
+            font-size: 2rem;
+            font-weight: bold;
+            line-height: 60px;
+            margin-bottom: 20px;
+        }
+
+        .step h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        .step p {
+            color: #bdc3c7;
+            font-size: 1.05rem;
+        }
+
+        /* Benefits */
+        .benefits {
+            padding: 80px 20px;
+            background: white;
+        }
+
+        .benefits h2 {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 50px;
+            color: #2c3e50;
+        }
+
+        .benefits-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .benefit-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+        }
+
+        .benefit-icon {
+            font-size: 2rem;
+            color: #e74c3c;
+            flex-shrink: 0;
+        }
+
+        .benefit-item h3 {
+            font-size: 1.3rem;
+            margin-bottom: 8px;
+            color: #2c3e50;
+        }
+
+        .benefit-item p {
+            color: #666;
+            font-size: 1rem;
+        }
+
+        /* Final CTA */
+        .final-cta {
+            padding: 80px 20px;
+            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .final-cta h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .final-cta p {
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            color: #ecf0f1;
+        }
+
+        .cta-button.secondary {
+            background: white;
+            color: #e74c3c;
+        }
+
+        .cta-button.secondary:hover {
+            background: #ecf0f1;
+            color: #c0392b;
+        }
+
+        /* Footer */
+        footer {
+            background: #1a252f;
+            color: #bdc3c7;
+            padding: 30px 20px;
+            text-align: center;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero .tagline {
+                font-size: 1.2rem;
+            }
+
+            .paths h2,
+            .how-it-works h2,
+            .benefits h2,
+            .problem h2 {
+                font-size: 2rem;
+            }
+
+            .paths-grid,
+            .steps,
+            .benefits-list {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>💪 DadLifts</h1>
+            <p class="tagline">From Couch to Confident</p>
+            <p class="subtitle">The simple strength program designed for busy dads who want to get stronger without the complexity or time commitment.</p>
+            <a href="#paths" class="cta-button">Start Your Journey</a>
+        </div>
+    </section>
+
+    <!-- Problem Section -->
+    <section class="problem">
+        <div class="container">
+            <h2>You're Busy. We Get It.</h2>
+            <p>Between work, family time, and everything else on your plate, finding time to get in shape feels impossible.</p>
+            <p>Traditional gym programs are complicated, time-consuming, and designed for people who have hours to spare.</p>
+            <p><strong>DadLifts is different.</strong> We focus on compound lifts that work your entire body in minimal time, so you can get stronger without sacrificing what matters most.</p>
+        </div>
+    </section>
+
+    <!-- Paths Section -->
+    <section class="paths" id="paths">
+        <div class="container">
+            <h2>Choose Your Path</h2>
+            <div class="paths-grid">
+                <div class="path-card">
+                    <div class="path-icon">🏃</div>
+                    <h3>Bodyweight</h3>
+                    <p>No equipment needed. Perfect for getting started at home or while traveling. Build a solid foundation with push-ups, squats, and pull-ups.</p>
+                </div>
+
+                <div class="path-card">
+                    <div class="path-icon">🔔</div>
+                    <h3>Kettlebell</h3>
+                    <p>One piece of equipment, endless possibilities. Swings, goblet squats, and presses will build functional strength fast.</p>
+                </div>
+
+                <div class="path-card">
+                    <div class="path-icon">🏋️</div>
+                    <h3>Barbell</h3>
+                    <p>The classic compound lifts. Squat, bench, deadlift, and press your way to serious strength with progressive programming.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="how-it-works">
+        <div class="container">
+            <h2>How It Works</h2>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Pick Your Path</h3>
+                    <p>Choose bodyweight, kettlebell, or barbell based on your equipment and goals.</p>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Follow the Program</h3>
+                    <p>Simple, progressive workouts focused on compound movements. 3-4 days per week, 30-45 minutes.</p>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Get Stronger</h3>
+                    <p>Track your progress and watch yourself transform from beginner to confident lifter.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits -->
+    <section class="benefits">
+        <div class="container">
+            <h2>Why DadLifts Works</h2>
+            <div class="benefits-list">
+                <div class="benefit-item">
+                    <div class="benefit-icon">⏱️</div>
+                    <div>
+                        <h3>Time-Efficient</h3>
+                        <p>Compound lifts work multiple muscle groups at once. Get more done in less time.</p>
+                    </div>
+                </div>
+
+                <div class="benefit-item">
+                    <div class="benefit-icon">📊</div>
+                    <div>
+                        <h3>Progressive & Simple</h3>
+                        <p>Clear progression plan that takes the guesswork out. Just show up and follow the program.</p>
+                    </div>
+                </div>
+
+                <div class="benefit-item">
+                    <div class="benefit-icon">👨‍👧‍👦</div>
+                    <div>
+                        <h3>Dad-Focused</h3>
+                        <p>Built for real dads with real schedules. No 2-hour gym sessions or complicated meal plans.</p>
+                    </div>
+                </div>
+
+                <div class="benefit-item">
+                    <div class="benefit-icon">🎯</div>
+                    <div>
+                        <h3>Beginner-Friendly</h3>
+                        <p>Never lifted before? Perfect. We start from zero and build you up safely and effectively.</p>
+                    </div>
+                </div>
+
+                <div class="benefit-item">
+                    <div class="benefit-icon">💪</div>
+                    <div>
+                        <h3>Functional Strength</h3>
+                        <p>Build strength that matters. Pick up kids, move furniture, and feel capable in daily life.</p>
+                    </div>
+                </div>
+
+                <div class="benefit-item">
+                    <div class="benefit-icon">🔄</div>
+                    <div>
+                        <h3>Sustainable</h3>
+                        <p>Not a crash course. A lifestyle change that fits into your busy dad life for the long haul.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="final-cta">
+        <div class="container">
+            <h2>Ready to Get Started?</h2>
+            <p>Join hundreds of dads transforming their strength, one lift at a time.</p>
+            <a href="#" class="cta-button secondary">Start Your Free Trial</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 DadLifts. Built by dads, for dads.</p>
+        </div>
+    </footer>
+</body>
+</html>

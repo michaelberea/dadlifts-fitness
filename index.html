@@ -441,25 +441,16 @@
                 <h2>Get Early Access</h2>
                 <p>We're building DadLifts now. Join the waitlist to be first in line when we launch.</p>
                 
-                <form 
-                    class="email-form" 
-                    action="https://buttondown.email/api/emails/embed-subscribe/michaelberea" 
-                    method="post" 
-                    target="popupwindow"
-                    onsubmit="window.open('https://buttondown.email/michaelberea', 'popupwindow');document.getElementById('formMessage').textContent='Check your email to confirm!';document.getElementById('formMessage').className='form-message success';return true"
-                >
+                <form class="email-form" id="waitlistForm">
                     <div class="form-group">
                         <input 
                             type="email" 
                             class="email-input" 
-                            name="email"
-                            id="bd-email"
+                            id="emailInput"
                             placeholder="your.email@example.com" 
                             required
                         >
-                        <input type="hidden" value="1" name="embed"/>
-                        <input type="hidden" name="tag" value="dadlifts-waitlist"/>
-                        <button type="submit" class="submit-btn">
+                        <button type="submit" class="submit-btn" id="submitBtn">
                             Join Waitlist
                         </button>
                     </div>
@@ -477,8 +468,60 @@
     </footer>
 
     <script>
-        // Form now uses native Buttondown submission
-        // No JavaScript handling needed - Buttondown handles everything
+        document.getElementById('waitlistForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const emailInput = document.getElementById('emailInput');
+            const submitBtn = document.getElementById('submitBtn');
+            const formMessage = document.getElementById('formMessage');
+            const email = emailInput.value.trim();
+            
+            // Basic validation
+            if (!email || !email.includes('@')) {
+                formMessage.textContent = 'Please enter a valid email address.';
+                formMessage.className = 'form-message error';
+                return;
+            }
+            
+            // Disable button and show loading
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Joining...';
+            formMessage.textContent = '';
+            
+            try {
+                // Call our Netlify function
+                const response = await fetch('/.netlify/functions/subscribe', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ email: email })
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    formMessage.textContent = "You're on the list! We'll email you when we launch.";
+                    formMessage.className = 'form-message success';
+                    emailInput.value = '';
+                    submitBtn.textContent = 'Joined!';
+                    
+                    // Reset button after delay
+                    setTimeout(() => {
+                        submitBtn.disabled = false;
+                        submitBtn.textContent = 'Join Waitlist';
+                    }, 2000);
+                } else {
+                    throw new Error(data.error || 'Signup failed');
+                }
+            } catch (error) {
+                console.error('Signup error:', error);
+                formMessage.textContent = 'Something went wrong. Please try again.';
+                formMessage.className = 'form-message error';
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Join Waitlist';
+            }
+        });
     </script>
 </body>
 </html>

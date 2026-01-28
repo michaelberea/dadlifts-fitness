@@ -19,6 +19,8 @@ exports.handler = async (event) => {
       };
     }
 
+    console.log('Attempting to subscribe:', email);
+
     // Make request to Buttondown API
     const result = await new Promise((resolve, reject) => {
       const data = JSON.stringify({
@@ -41,6 +43,9 @@ exports.handler = async (event) => {
         let body = '';
         res.on('data', (chunk) => body += chunk);
         res.on('end', () => {
+          console.log('Buttondown response status:', res.statusCode);
+          console.log('Buttondown response body:', body);
+          
           try {
             const parsed = JSON.parse(body);
             resolve({ statusCode: res.statusCode, data: parsed });
@@ -50,10 +55,16 @@ exports.handler = async (event) => {
         });
       });
 
-      req.on('error', reject);
+      req.on('error', (e) => {
+        console.error('Request error:', e);
+        reject(e);
+      });
+      
       req.write(data);
       req.end();
     });
+
+    console.log('Result:', JSON.stringify(result));
 
     if (result.statusCode === 201 || result.statusCode === 200) {
       return {
@@ -61,14 +72,23 @@ exports.handler = async (event) => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ success: true, message: 'Subscribed successfully' })
       };
-    } else if (result.data.email && result.data.email[0] && result.data.email[0].includes('already subscribed')) {
+    } else if (result.data.email && Array.isArray(result.data.email) && result.data.email[0] && result.data.email[0].includes('already subscribed')) {
       return {
         statusCode: 200,
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ success: true, message: 'Already subscribed' })
       };
     } else {
-      throw new Error('Subscription failed');
+      // Return detailed error info
+      return {
+        statusCode: 400,
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ 
+          error: 'Subscription failed', 
+          buttondownStatus: result.statusCode,
+          buttondownResponse: result.data 
+        })
+      };
     }
   } catch (error) {
     console.error('Subscribe error:', error);

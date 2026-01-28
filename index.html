@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DadLifts - Strength Training for Busy Dads</title>
+    <title>DadLifts - Start Lifting Without the Overwhelm</title>
+    <meta name="description" content="Strength training for busy dads. 30-45 min workouts. No shame, no complexity. Just show up and lift.">
+    
     <style>
         * {
             margin: 0;
@@ -11,438 +13,530 @@
             box-sizing: border-box;
         }
 
+        :root {
+            --dark: #1a1a1a;
+            --medium: #2d2d2d;
+            --accent: #4a9eff;
+            --text: #e0e0e0;
+            --text-muted: #a0a0a0;
+            --success: #4ade80;
+        }
+
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            background: var(--dark);
+            color: var(--text);
             line-height: 1.6;
-            color: #333;
+            font-size: 18px;
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 680px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 24px;
+        }
+
+        /* Header */
+        header {
+            padding: 32px 0;
+            border-bottom: 1px solid var(--medium);
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--text);
         }
 
         /* Hero Section */
         .hero {
-            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
-            color: white;
-            padding: 80px 20px;
+            padding: 80px 0 60px;
             text-align: center;
         }
 
         .hero h1 {
-            font-size: 3.5rem;
-            font-weight: 800;
-            margin-bottom: 20px;
-            letter-spacing: -1px;
-        }
-
-        .hero .tagline {
-            font-size: 1.5rem;
-            margin-bottom: 30px;
-            color: #ecf0f1;
-            font-weight: 300;
+            font-size: 42px;
+            line-height: 1.2;
+            margin-bottom: 24px;
+            font-weight: 700;
+            color: var(--text);
         }
 
         .hero .subtitle {
-            font-size: 1.1rem;
-            margin-bottom: 40px;
-            color: #bdc3c7;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
+            font-size: 22px;
+            color: var(--text-muted);
+            margin-bottom: 48px;
+            line-height: 1.5;
         }
 
-        .cta-button {
-            display: inline-block;
-            background: #e74c3c;
-            color: white;
-            padding: 18px 50px;
-            text-decoration: none;
-            border-radius: 50px;
-            font-size: 1.2rem;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(231, 76, 60, 0.4);
+        .hero .problem {
+            background: var(--medium);
+            padding: 32px;
+            border-radius: 8px;
+            margin-bottom: 48px;
+            text-align: left;
         }
 
-        .cta-button:hover {
-            background: #c0392b;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(231, 76, 60, 0.5);
+        .hero .problem p {
+            font-size: 19px;
+            line-height: 1.7;
+            color: var(--text-muted);
+            margin-bottom: 16px;
         }
 
-        /* Problem Section */
-        .problem {
-            padding: 80px 20px;
-            background: #ecf0f1;
+        .hero .problem p:last-child {
+            margin-bottom: 0;
+        }
+
+        .hero .problem strong {
+            color: var(--text);
+        }
+
+        /* The Shift Section */
+        .shift {
+            padding: 60px 0;
+            background: var(--medium);
+        }
+
+        .shift h2 {
+            font-size: 32px;
+            margin-bottom: 32px;
             text-align: center;
         }
 
-        .problem h2 {
-            font-size: 2.5rem;
-            margin-bottom: 30px;
-            color: #2c3e50;
-        }
-
-        .problem p {
-            font-size: 1.2rem;
-            max-width: 800px;
-            margin: 0 auto 20px;
-            color: #555;
-        }
-
-        /* Paths Section */
-        .paths {
-            padding: 80px 20px;
-            background: white;
-        }
-
-        .paths h2 {
-            font-size: 2.5rem;
-            text-align: center;
-            margin-bottom: 60px;
-            color: #2c3e50;
-        }
-
-        .paths-grid {
+        .shift-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 40px;
-            max-width: 1000px;
-            margin: 0 auto;
+            grid-template-columns: 1fr;
+            gap: 32px;
+            margin-bottom: 40px;
         }
 
-        .path-card {
-            background: #fff;
-            border: 3px solid #ecf0f1;
-            border-radius: 15px;
-            padding: 40px 30px;
-            text-align: center;
-            transition: all 0.3s ease;
+        .shift-item {
+            background: var(--dark);
+            padding: 28px;
+            border-radius: 8px;
+            border-left: 4px solid var(--accent);
         }
 
-        .path-card:hover {
-            transform: translateY(-5px);
-            border-color: #e74c3c;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        .shift-item .from {
+            color: var(--text-muted);
+            font-size: 16px;
+            margin-bottom: 8px;
+            text-decoration: line-through;
         }
 
-        .path-icon {
-            font-size: 4rem;
-            margin-bottom: 20px;
-        }
-
-        .path-card h3 {
-            font-size: 1.8rem;
-            margin-bottom: 15px;
-            color: #2c3e50;
-        }
-
-        .path-card p {
-            color: #666;
-            font-size: 1.05rem;
-            line-height: 1.8;
+        .shift-item .to {
+            font-size: 20px;
+            color: var(--text);
+            font-weight: 500;
         }
 
         /* How It Works */
         .how-it-works {
-            padding: 80px 20px;
-            background: #2c3e50;
-            color: white;
+            padding: 60px 0;
         }
 
         .how-it-works h2 {
-            font-size: 2.5rem;
+            font-size: 32px;
+            margin-bottom: 40px;
             text-align: center;
-            margin-bottom: 60px;
         }
 
         .steps {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 40px;
-            max-width: 1000px;
-            margin: 0 auto;
+            gap: 32px;
+            margin-bottom: 40px;
         }
 
         .step {
-            text-align: center;
+            display: flex;
+            gap: 20px;
         }
 
         .step-number {
-            display: inline-block;
-            width: 60px;
-            height: 60px;
-            background: #e74c3c;
-            color: white;
+            flex-shrink: 0;
+            width: 48px;
+            height: 48px;
+            background: var(--accent);
+            color: var(--dark);
             border-radius: 50%;
-            font-size: 2rem;
-            font-weight: bold;
-            line-height: 60px;
-            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 20px;
         }
 
-        .step h3 {
-            font-size: 1.5rem;
-            margin-bottom: 15px;
+        .step-content h3 {
+            font-size: 22px;
+            margin-bottom: 8px;
+            color: var(--text);
         }
 
-        .step p {
-            color: #bdc3c7;
-            font-size: 1.05rem;
+        .step-content p {
+            color: var(--text-muted);
+            font-size: 17px;
         }
 
-        /* Benefits */
-        .benefits {
-            padding: 80px 20px;
-            background: white;
+        /* What It's Not */
+        .not-section {
+            padding: 60px 0;
+            background: var(--medium);
         }
 
-        .benefits h2 {
-            font-size: 2.5rem;
+        .not-section h2 {
+            font-size: 32px;
+            margin-bottom: 32px;
             text-align: center;
-            margin-bottom: 50px;
-            color: #2c3e50;
         }
 
-        .benefits-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-            max-width: 1000px;
+        .not-list {
+            list-style: none;
+            margin-bottom: 32px;
+        }
+
+        .not-list li {
+            padding: 16px 0;
+            border-bottom: 1px solid var(--dark);
+            font-size: 18px;
+            color: var(--text-muted);
+        }
+
+        .not-list li:before {
+            content: "✕";
+            color: var(--text-muted);
+            margin-right: 12px;
+            font-weight: 700;
+        }
+
+        .is-statement {
+            background: var(--dark);
+            padding: 32px;
+            border-radius: 8px;
+            border-left: 4px solid var(--success);
+            font-size: 20px;
+            font-weight: 500;
+            text-align: center;
+            color: var(--text);
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .cta-section h2 {
+            font-size: 36px;
+            margin-bottom: 16px;
+        }
+
+        .cta-section p {
+            font-size: 19px;
+            color: var(--text-muted);
+            margin-bottom: 40px;
+        }
+
+        .email-form {
+            max-width: 480px;
             margin: 0 auto;
         }
 
-        .benefit-item {
+        .form-group {
             display: flex;
-            align-items: flex-start;
-            gap: 15px;
+            gap: 12px;
+            margin-bottom: 16px;
         }
 
-        .benefit-icon {
-            font-size: 2rem;
-            color: #e74c3c;
-            flex-shrink: 0;
+        .email-input {
+            flex: 1;
+            padding: 16px 20px;
+            font-size: 17px;
+            border: 2px solid var(--medium);
+            background: var(--medium);
+            color: var(--text);
+            border-radius: 6px;
+            outline: none;
+            transition: border-color 0.2s;
         }
 
-        .benefit-item h3 {
-            font-size: 1.3rem;
-            margin-bottom: 8px;
-            color: #2c3e50;
+        .email-input:focus {
+            border-color: var(--accent);
         }
 
-        .benefit-item p {
-            color: #666;
-            font-size: 1rem;
-        }
-
-        /* Final CTA */
-        .final-cta {
-            padding: 80px 20px;
-            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+        .submit-btn {
+            padding: 16px 32px;
+            font-size: 17px;
+            font-weight: 600;
+            background: var(--accent);
             color: white;
-            text-align: center;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: opacity 0.2s;
         }
 
-        .final-cta h2 {
-            font-size: 2.5rem;
-            margin-bottom: 20px;
+        .submit-btn:hover {
+            opacity: 0.9;
         }
 
-        .final-cta p {
-            font-size: 1.2rem;
-            margin-bottom: 40px;
-            color: #ecf0f1;
+        .submit-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
         }
 
-        .cta-button.secondary {
-            background: white;
-            color: #e74c3c;
+        .form-message {
+            font-size: 16px;
+            margin-top: 12px;
+            min-height: 24px;
         }
 
-        .cta-button.secondary:hover {
-            background: #ecf0f1;
-            color: #c0392b;
+        .form-message.success {
+            color: var(--success);
+        }
+
+        .form-message.error {
+            color: #ef4444;
+        }
+
+        .privacy-note {
+            font-size: 14px;
+            color: var(--text-muted);
+            margin-top: 16px;
         }
 
         /* Footer */
         footer {
-            background: #1a252f;
-            color: #bdc3c7;
-            padding: 30px 20px;
+            padding: 40px 0;
+            border-top: 1px solid var(--medium);
             text-align: center;
+            color: var(--text-muted);
+            font-size: 15px;
         }
 
-        /* Responsive */
-        @media (max-width: 768px) {
+        /* Mobile Responsive */
+        @media (max-width: 640px) {
             .hero h1 {
-                font-size: 2.5rem;
+                font-size: 32px;
             }
 
-            .hero .tagline {
-                font-size: 1.2rem;
+            .hero .subtitle {
+                font-size: 19px;
             }
 
-            .paths h2,
+            .shift h2,
             .how-it-works h2,
-            .benefits h2,
-            .problem h2 {
-                font-size: 2rem;
+            .not-section h2 {
+                font-size: 28px;
             }
 
-            .paths-grid,
-            .steps,
-            .benefits-list {
-                grid-template-columns: 1fr;
+            .form-group {
+                flex-direction: column;
+            }
+
+            .submit-btn {
+                width: 100%;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Hero Section -->
-    <section class="hero">
+    <header>
         <div class="container">
-            <h1>💪 DadLifts</h1>
-            <p class="tagline">From Couch to Confident</p>
-            <p class="subtitle">The simple strength program designed for busy dads who want to get stronger without the complexity or time commitment.</p>
-            <a href="#paths" class="cta-button">Start Your Journey</a>
+            <div class="logo">DadLifts</div>
         </div>
-    </section>
+    </header>
 
-    <!-- Problem Section -->
-    <section class="problem">
-        <div class="container">
-            <h2>You're Busy. We Get It.</h2>
-            <p>Between work, family time, and everything else on your plate, finding time to get in shape feels impossible.</p>
-            <p>Traditional gym programs are complicated, time-consuming, and designed for people who have hours to spare.</p>
-            <p><strong>DadLifts is different.</strong> We focus on compound lifts that work your entire body in minimal time, so you can get stronger without sacrificing what matters most.</p>
-        </div>
-    </section>
-
-    <!-- Paths Section -->
-    <section class="paths" id="paths">
-        <div class="container">
-            <h2>Choose Your Path</h2>
-            <div class="paths-grid">
-                <div class="path-card">
-                    <div class="path-icon">🏃</div>
-                    <h3>Bodyweight</h3>
-                    <p>No equipment needed. Perfect for getting started at home or while traveling. Build a solid foundation with push-ups, squats, and pull-ups.</p>
-                </div>
-
-                <div class="path-card">
-                    <div class="path-icon">🔔</div>
-                    <h3>Kettlebell</h3>
-                    <p>One piece of equipment, endless possibilities. Swings, goblet squats, and presses will build functional strength fast.</p>
-                </div>
-
-                <div class="path-card">
-                    <div class="path-icon">🏋️</div>
-                    <h3>Barbell</h3>
-                    <p>The classic compound lifts. Squat, bench, deadlift, and press your way to serious strength with progressive programming.</p>
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container">
+                <h1>You want to be strong for your family.<br>You just don't know where to start.</h1>
+                <p class="subtitle">Strength training for busy dads who feel stuck between "I should work out" and actually doing it.</p>
+                
+                <div class="problem">
+                    <p><strong>You used to be in decent shape.</strong> Maybe you played sports. Maybe you lifted in your twenties. But it's been years.</p>
+                    <p><strong>You know you should get back to it.</strong> For your health. For your kids. To feel like yourself again.</p>
+                    <p><strong>But you're tired.</strong> Decision-fatigued. And honestly? A little ashamed that you even need help with this.</p>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- How It Works -->
-    <section class="how-it-works">
-        <div class="container">
-            <h2>How It Works</h2>
-            <div class="steps">
-                <div class="step">
-                    <div class="step-number">1</div>
-                    <h3>Pick Your Path</h3>
-                    <p>Choose bodyweight, kettlebell, or barbell based on your equipment and goals.</p>
-                </div>
-
-                <div class="step">
-                    <div class="step-number">2</div>
-                    <h3>Follow the Program</h3>
-                    <p>Simple, progressive workouts focused on compound movements. 3-4 days per week, 30-45 minutes.</p>
-                </div>
-
-                <div class="step">
-                    <div class="step-number">3</div>
-                    <h3>Get Stronger</h3>
-                    <p>Track your progress and watch yourself transform from beginner to confident lifter.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Benefits -->
-    <section class="benefits">
-        <div class="container">
-            <h2>Why DadLifts Works</h2>
-            <div class="benefits-list">
-                <div class="benefit-item">
-                    <div class="benefit-icon">⏱️</div>
-                    <div>
-                        <h3>Time-Efficient</h3>
-                        <p>Compound lifts work multiple muscle groups at once. Get more done in less time.</p>
+        <!-- The Shift -->
+        <section class="shift">
+            <div class="container">
+                <h2>What Changes</h2>
+                <div class="shift-grid">
+                    <div class="shift-item">
+                        <div class="from">"I'm too out of shape to start."</div>
+                        <div class="to">"I showed up today. That's what matters."</div>
                     </div>
-                </div>
-
-                <div class="benefit-item">
-                    <div class="benefit-icon">📊</div>
-                    <div>
-                        <h3>Progressive & Simple</h3>
-                        <p>Clear progression plan that takes the guesswork out. Just show up and follow the program.</p>
+                    <div class="shift-item">
+                        <div class="from">"I don't even know what to do."</div>
+                        <div class="to">"I know exactly what's next. No decisions required."</div>
                     </div>
-                </div>
-
-                <div class="benefit-item">
-                    <div class="benefit-icon">👨‍👧‍👦</div>
-                    <div>
-                        <h3>Dad-Focused</h3>
-                        <p>Built for real dads with real schedules. No 2-hour gym sessions or complicated meal plans.</p>
+                    <div class="shift-item">
+                        <div class="from">"I don't have time for this."</div>
+                        <div class="to">"30 minutes counts. I'm building something."</div>
                     </div>
-                </div>
-
-                <div class="benefit-item">
-                    <div class="benefit-icon">🎯</div>
-                    <div>
-                        <h3>Beginner-Friendly</h3>
-                        <p>Never lifted before? Perfect. We start from zero and build you up safely and effectively.</p>
-                    </div>
-                </div>
-
-                <div class="benefit-item">
-                    <div class="benefit-icon">💪</div>
-                    <div>
-                        <h3>Functional Strength</h3>
-                        <p>Build strength that matters. Pick up kids, move furniture, and feel capable in daily life.</p>
-                    </div>
-                </div>
-
-                <div class="benefit-item">
-                    <div class="benefit-icon">🔄</div>
-                    <div>
-                        <h3>Sustainable</h3>
-                        <p>Not a crash course. A lifestyle change that fits into your busy dad life for the long haul.</p>
+                    <div class="shift-item">
+                        <div class="from">"What if I start and quit again?"</div>
+                        <div class="to">"My kids see me taking care of myself."</div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Final CTA -->
-    <section class="final-cta">
-        <div class="container">
-            <h2>Ready to Get Started?</h2>
-            <p>Join hundreds of dads transforming their strength, one lift at a time.</p>
-            <a href="#" class="cta-button secondary">Start Your Free Trial</a>
-        </div>
-    </section>
+        <!-- How It Works -->
+        <section class="how-it-works">
+            <div class="container">
+                <h2>How It Works</h2>
+                <div class="steps">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h3>Open the app</h3>
+                            <p>See exactly what to do today. 4-6 exercises, sets and reps laid out. No navigation, no choices, no wondering.</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h3>Do the workout</h3>
+                            <p>30-45 minutes. Minimal equipment. Body weight, kettlebell, or barbell. Check off each exercise as you go.</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h3>You're done</h3>
+                            <p>That's it. See what's next. Come back in a day or two. Progress over perfection.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-    <!-- Footer -->
+        <!-- What It's Not -->
+        <section class="not-section">
+            <div class="container">
+                <h2>What DadLifts Is Not</h2>
+                <ul class="not-list">
+                    <li>Not a bodybuilding program or aesthetic focus</li>
+                    <li>Not a social network with leaderboards and comparison</li>
+                    <li>Not a comprehensive platform with 47 features you'll never use</li>
+                    <li>Not optimized for advanced lifters or competition prep</li>
+                    <li>Not trying to sell you equipment or supplements</li>
+                    <li>Not going to make you feel bad for missing a day</li>
+                </ul>
+                <div class="is-statement">
+                    DadLifts is maniacally focused on one thing: helping you show up and lift consistently.
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA -->
+        <section class="cta-section">
+            <div class="container">
+                <h2>Get Early Access</h2>
+                <p>We're building DadLifts now. Join the waitlist to be first in line when we launch.</p>
+                
+                <form class="email-form" id="waitlistForm">
+                    <div class="form-group">
+                        <input 
+                            type="email" 
+                            class="email-input" 
+                            id="emailInput"
+                            placeholder="your.email@example.com" 
+                            required
+                        >
+                        <button type="submit" class="submit-btn" id="submitBtn">
+                            Join Waitlist
+                        </button>
+                    </div>
+                    <div class="form-message" id="formMessage"></div>
+                    <p class="privacy-note">No spam. Just updates when we launch. Unsubscribe anytime.</p>
+                </form>
+            </div>
+        </section>
+    </main>
+
     <footer>
         <div class="container">
-            <p>&copy; 2026 DadLifts. Built by dads, for dads.</p>
+            <p>&copy; 2025 DadLifts. Built for dads who want to be strong for their families.</p>
         </div>
     </footer>
+
+    <script>
+        // Simple form handling (you'll need to connect this to your email service)
+        document.getElementById('waitlistForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const emailInput = document.getElementById('emailInput');
+            const submitBtn = document.getElementById('submitBtn');
+            const formMessage = document.getElementById('formMessage');
+            const email = emailInput.value.trim();
+            
+            // Basic validation
+            if (!email || !email.includes('@')) {
+                formMessage.textContent = 'Please enter a valid email address.';
+                formMessage.className = 'form-message error';
+                return;
+            }
+            
+            // Disable button and show loading
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Joining...';
+            formMessage.textContent = '';
+            
+            // TODO: Replace this with your actual email collection service
+            // Examples: ConvertKit, Mailchimp, Buttondown, or a simple Google Form
+            
+            // Simulated API call (replace with real endpoint)
+            setTimeout(() => {
+                // Success state
+                formMessage.textContent = "You're on the list! We'll email you when we launch.";
+                formMessage.className = 'form-message success';
+                emailInput.value = '';
+                submitBtn.textContent = 'Joined!';
+                
+                // Optional: Send to analytics
+                console.log('Waitlist signup:', email);
+                
+                // Reset button after delay
+                setTimeout(() => {
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'Join Waitlist';
+                }, 2000);
+            }, 1000);
+            
+            /* 
+            // Example: Real API integration
+            try {
+                const response = await fetch('YOUR_ENDPOINT_HERE', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ email: email })
+                });
+                
+                if (response.ok) {
+                    formMessage.textContent = "You're on the list! We'll email you when we launch.";
+                    formMessage.className = 'form-message success';
+                    emailInput.value = '';
+                } else {
+                    throw new Error('Signup failed');
+                }
+            } catch (error) {
+                formMessage.textContent = 'Something went wrong. Please try again.';
+                formMessage.className = 'form-message error';
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Join Waitlist';
+            }
+            */
+        });
+    </script>
 </body>
 </html>

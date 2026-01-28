@@ -441,16 +441,25 @@
                 <h2>Get Early Access</h2>
                 <p>We're building DadLifts now. Join the waitlist to be first in line when we launch.</p>
                 
-                <form class="email-form" id="waitlistForm">
+                <form 
+                    class="email-form" 
+                    action="https://buttondown.email/api/emails/embed-subscribe/michaelberea" 
+                    method="post" 
+                    target="popupwindow"
+                    onsubmit="window.open('https://buttondown.email/michaelberea', 'popupwindow');document.getElementById('formMessage').textContent='Check your email to confirm!';document.getElementById('formMessage').className='form-message success';return true"
+                >
                     <div class="form-group">
                         <input 
                             type="email" 
                             class="email-input" 
-                            id="emailInput"
+                            name="email"
+                            id="bd-email"
                             placeholder="your.email@example.com" 
                             required
                         >
-                        <button type="submit" class="submit-btn" id="submitBtn">
+                        <input type="hidden" value="1" name="embed"/>
+                        <input type="hidden" name="tag" value="dadlifts-waitlist"/>
+                        <button type="submit" class="submit-btn">
                             Join Waitlist
                         </button>
                     </div>
@@ -468,75 +477,8 @@
     </footer>
 
     <script>
-        // Simple form handling (you'll need to connect this to your email service)
-        document.getElementById('waitlistForm').addEventListener('submit', async function(e) {
-            e.preventDefault();
-            
-            const emailInput = document.getElementById('emailInput');
-            const submitBtn = document.getElementById('submitBtn');
-            const formMessage = document.getElementById('formMessage');
-            const email = emailInput.value.trim();
-            
-            // Basic validation
-            if (!email || !email.includes('@')) {
-                formMessage.textContent = 'Please enter a valid email address.';
-                formMessage.className = 'form-message error';
-                return;
-            }
-            
-            // Disable button and show loading
-            submitBtn.disabled = true;
-            submitBtn.textContent = 'Joining...';
-            formMessage.textContent = '';
-            
-            // Buttondown API integration
-            try {
-                const response = await fetch('https://api.buttondown.email/v1/subscribers', {
-                    method: 'POST',
-                    headers: {
-                        'Authorization': 'Token 66c0dbc7-22ae-4cee-a174-8245052034d8',
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        email: email,
-                        tags: ['dadlifts-waitlist']
-                    })
-                });
-                
-                const data = await response.json();
-                
-                if (response.ok) {
-                    formMessage.textContent = "You're on the list! We'll email you when we launch.";
-                    formMessage.className = 'form-message success';
-                    emailInput.value = '';
-                    submitBtn.textContent = 'Joined!';
-                    
-                    // Reset button after delay
-                    setTimeout(() => {
-                        submitBtn.disabled = false;
-                        submitBtn.textContent = 'Join Waitlist';
-                    }, 2000);
-                } else {
-                    // Handle specific errors
-                    if (data.email && data.email[0] && data.email[0].includes('already subscribed')) {
-                        formMessage.textContent = "You're already on the list!";
-                        formMessage.className = 'form-message success';
-                        emailInput.value = '';
-                    } else {
-                        throw new Error('Signup failed');
-                    }
-                    
-                    submitBtn.disabled = false;
-                    submitBtn.textContent = 'Join Waitlist';
-                }
-            } catch (error) {
-                console.error('Signup error:', error);
-                formMessage.textContent = 'Something went wrong. Please try again.';
-                formMessage.className = 'form-message error';
-                submitBtn.disabled = false;
-                submitBtn.textContent = 'Join Waitlist';
-            }
-        });
+        // Form now uses native Buttondown submission
+        // No JavaScript handling needed - Buttondown handles everything
     </script>
 </body>
 </html>

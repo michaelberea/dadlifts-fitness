@@ -489,53 +489,53 @@
             submitBtn.textContent = 'Joining...';
             formMessage.textContent = '';
             
-            // TODO: Replace this with your actual email collection service
-            // Examples: ConvertKit, Mailchimp, Buttondown, or a simple Google Form
-            
-            // Simulated API call (replace with real endpoint)
-            setTimeout(() => {
-                // Success state
-                formMessage.textContent = "You're on the list! We'll email you when we launch.";
-                formMessage.className = 'form-message success';
-                emailInput.value = '';
-                submitBtn.textContent = 'Joined!';
-                
-                // Optional: Send to analytics
-                console.log('Waitlist signup:', email);
-                
-                // Reset button after delay
-                setTimeout(() => {
-                    submitBtn.disabled = false;
-                    submitBtn.textContent = 'Join Waitlist';
-                }, 2000);
-            }, 1000);
-            
-            /* 
-            // Example: Real API integration
+            // Buttondown API integration
             try {
-                const response = await fetch('YOUR_ENDPOINT_HERE', {
+                const response = await fetch('https://api.buttondown.email/v1/subscribers', {
                     method: 'POST',
                     headers: {
+                        'Authorization': 'Token 66c0dbc7-22ae-4cee-a174-8245052034d8',
                         'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify({ email: email })
+                    body: JSON.stringify({
+                        email: email,
+                        tags: ['dadlifts-waitlist']
+                    })
                 });
+                
+                const data = await response.json();
                 
                 if (response.ok) {
                     formMessage.textContent = "You're on the list! We'll email you when we launch.";
                     formMessage.className = 'form-message success';
                     emailInput.value = '';
+                    submitBtn.textContent = 'Joined!';
+                    
+                    // Reset button after delay
+                    setTimeout(() => {
+                        submitBtn.disabled = false;
+                        submitBtn.textContent = 'Join Waitlist';
+                    }, 2000);
                 } else {
-                    throw new Error('Signup failed');
+                    // Handle specific errors
+                    if (data.email && data.email[0] && data.email[0].includes('already subscribed')) {
+                        formMessage.textContent = "You're already on the list!";
+                        formMessage.className = 'form-message success';
+                        emailInput.value = '';
+                    } else {
+                        throw new Error('Signup failed');
+                    }
+                    
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'Join Waitlist';
                 }
             } catch (error) {
+                console.error('Signup error:', error);
                 formMessage.textContent = 'Something went wrong. Please try again.';
                 formMessage.className = 'form-message error';
-            } finally {
                 submitBtn.disabled = false;
                 submitBtn.textContent = 'Join Waitlist';
             }
-            */
         });
     </script>
 </body>

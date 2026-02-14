@@ -179,12 +179,16 @@ const Icons = {
   ),
 };
 
-function AboutFooter() {
+function AboutFooter({ onShowLegal }) {
   return (
     <div style={{ padding: "32px 20px 24px", textAlign: "center", borderTop: `1px solid ${c.border}`, marginTop: "20px" }}>
       <div style={{ fontSize: "13px", fontWeight: 800, color: c.textMuted, letterSpacing: "0.12em", marginBottom: "6px" }}>DADLIFTS</div>
       <div style={{ fontSize: "12px", color: c.textMuted, lineHeight: 1.5, marginBottom: "4px", fontStyle: "italic" }}>The world needs strong dads.</div>
-      <div style={{ fontSize: "11px", color: c.textMuted, opacity: 0.6 }}>Built for dads, by a dad.</div>
+      <div style={{ fontSize: "11px", color: c.textMuted, opacity: 0.6, marginBottom: "12px" }}>Built for dads, by a dad.</div>
+      <div style={{ display: "flex", justifyContent: "center", gap: "16px" }}>
+        <button onClick={() => onShowLegal("privacy")} style={{ background: "none", border: "none", color: c.textMuted, fontSize: "11px", cursor: "pointer", opacity: 0.6, padding: 0 }}>Privacy Policy</button>
+        <button onClick={() => onShowLegal("terms")} style={{ background: "none", border: "none", color: c.textMuted, fontSize: "11px", cursor: "pointer", opacity: 0.6, padding: 0 }}>Terms of Use</button>
+      </div>
     </div>
   );
 }
@@ -341,7 +345,7 @@ function TodayScreen({ equipmentLevel, progress, setProgress }) {
   );
 }
 
-function ProgramScreen({ equipmentLevel }) {
+function ProgramScreen({ equipmentLevel, onShowLegal }) {
   const workouts = WORKOUTS[equipmentLevel];
   const [expandedDay, setExpandedDay] = useState(null);
   return (
@@ -394,12 +398,12 @@ function ProgramScreen({ equipmentLevel }) {
           </div>
         ))}
       </div>
-      <AboutFooter />
+      <AboutFooter onShowLegal={onShowLegal} />
     </div>
   );
 }
 
-function LearnScreen() {
+function LearnScreen({ onShowLegal }) {
   const [expandedArticle, setExpandedArticle] = useState(null);
   return (
     <div style={{ padding: "20px", paddingBottom: "100px" }}>
@@ -423,12 +427,12 @@ function LearnScreen() {
           </div>
         ))}
       </div>
-      <AboutFooter />
+      <AboutFooter onShowLegal={onShowLegal} />
     </div>
   );
 }
 
-function ProgressScreen({ progress }) {
+function ProgressScreen({ progress, onShowLegal }) {
   const currentWeek = Math.floor(progress.totalCompleted / 3) + 1;
   const workoutsThisWeek = progress.totalCompleted % 3;
   const getLast7Days = () => {
@@ -511,12 +515,54 @@ function ProgressScreen({ progress }) {
           </div>
         </div>
       )}
-      <AboutFooter />
+      <AboutFooter onShowLegal={onShowLegal} />
     </div>
   );
 }
 
-function WelcomeScreen({ onStart }) {
+function LegalScreen({ page, onBack }) {
+  const content = page === "privacy" ? {
+    title: "Privacy Policy",
+    lastUpdated: "February 2026",
+    sections: [
+      { heading: "The short version", body: "DadLifts doesn't collect your data. Everything stays on your device." },
+      { heading: "What we store", body: "Your workout progress and equipment preference are saved in your browser's local storage. This data never leaves your device — we don't have servers, accounts, or databases storing your information." },
+      { heading: "Analytics & tracking", body: "We don't use analytics, cookies, or tracking scripts. No third parties are watching your workout habits." },
+      { heading: "Third-party services", body: "We load the Inter font from Google Fonts. Google may log standard web request data (IP address, browser type) when this font is loaded. That's the only external service we use." },
+      { heading: "Contact", body: "Questions? Reach out at dadlifts.fitness." },
+    ],
+  } : {
+    title: "Terms of Use",
+    lastUpdated: "February 2026",
+    sections: [
+      { heading: "Not medical advice", body: "DadLifts provides general fitness information, not medical advice. This program is for educational purposes. Consult your doctor before starting any exercise program, especially if you have existing health conditions or injuries." },
+      { heading: "Use at your own risk", body: "Strength training carries inherent risk of injury. You are solely responsible for your safety. Start with light weights, learn proper form, and listen to your body. If something hurts, stop." },
+      { heading: "No guarantees", body: "Results vary. We don't guarantee any specific outcomes. Consistency, nutrition, recovery, and individual factors all affect progress." },
+      { heading: "The program", body: "DadLifts is provided free of charge, as-is, with no warranty. We may update or modify the program at any time." },
+      { heading: "That's it", body: "Be smart. Lift safely. Take care of yourself so you can take care of your family." },
+    ],
+  };
+
+  return (
+    <div style={{ minHeight: "100vh", background: c.bg, padding: "0 0 60px" }}>
+      <div style={{ padding: "14px 20px", borderBottom: `1px solid ${c.border}`, display: "flex", alignItems: "center", gap: "12px" }}>
+        <button onClick={onBack} style={{ background: "none", border: "none", color: c.textSecondary, fontSize: "14px", cursor: "pointer", padding: "4px 0", fontWeight: 600 }}>← Back</button>
+      </div>
+      <div style={{ padding: "28px 24px", maxWidth: "500px", margin: "0 auto" }}>
+        <h2 style={{ fontSize: "22px", fontWeight: 800, color: c.text, margin: "0 0 6px" }}>{content.title}</h2>
+        <p style={{ fontSize: "11px", color: c.textMuted, margin: "0 0 28px" }}>Last updated: {content.lastUpdated}</p>
+        {content.sections.map((s, i) => (
+          <div key={i} style={{ marginBottom: "22px" }}>
+            <h3 style={{ fontSize: "14px", fontWeight: 700, color: c.text, margin: "0 0 6px" }}>{s.heading}</h3>
+            <p style={{ fontSize: "13px", color: c.textSecondary, lineHeight: 1.6, margin: 0 }}>{s.body}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function WelcomeScreen({ onStart, onShowLegal }) {
   return (
     <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: "40px 28px", textAlign: "center", background: c.bg }}>
       <div style={{ width: "40px", height: "3px", background: c.accent, borderRadius: "2px", marginBottom: "40px" }} />
@@ -534,6 +580,10 @@ function WelcomeScreen({ onStart }) {
         Start the Program
       </button>
       <p style={{ fontSize: "11px", color: c.textMuted, marginTop: "14px" }}>Free. No account needed.</p>
+      <div style={{ display: "flex", gap: "16px", marginTop: "10px" }}>
+        <button onClick={() => onShowLegal("privacy")} style={{ background: "none", border: "none", color: c.textMuted, fontSize: "10px", cursor: "pointer", opacity: 0.5, padding: 0 }}>Privacy Policy</button>
+        <button onClick={() => onShowLegal("terms")} style={{ background: "none", border: "none", color: c.textMuted, fontSize: "10px", cursor: "pointer", opacity: 0.5, padding: 0 }}>Terms of Use</button>
+      </div>
     </div>
   );
 }
@@ -546,6 +596,7 @@ export default function DadLifts() {
   const [equipmentLevel, setEquipmentLevel] = useState("fullGym");
   const [showEquipmentModal, setShowEquipmentModal] = useState(false);
   const [progress, setProgress] = useState(DEFAULT_PROGRESS);
+  const [legalPage, setLegalPage] = useState(null);
 
   useEffect(() => {
     try {
@@ -566,12 +617,22 @@ export default function DadLifts() {
     setShowEquipmentModal(true);
   };
 
+  if (legalPage) {
+    return (
+      <div style={{ fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" }}>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+        <style>{`* { box-sizing: border-box; } body { margin: 0; background: ${c.bg}; }`}</style>
+        <LegalScreen page={legalPage} onBack={() => setLegalPage(null)} />
+      </div>
+    );
+  }
+
   if (!hasStarted) {
     return (
       <>
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
         <style>{`* { box-sizing: border-box; } body { margin: 0; background: ${c.bg}; }`}</style>
-        <WelcomeScreen onStart={handleStart} />
+        <WelcomeScreen onStart={handleStart} onShowLegal={setLegalPage} />
       </>
     );
   }
@@ -582,9 +643,9 @@ export default function DadLifts() {
       <style>{`* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; } body { margin: 0; background: ${c.bg}; } button:active { opacity: 0.85; }`}</style>
       <Header equipmentLevel={equipmentLevel} setShowEquipmentModal={setShowEquipmentModal} />
       {currentTab === "today" && <TodayScreen equipmentLevel={equipmentLevel} progress={progress} setProgress={setProgress} />}
-      {currentTab === "program" && <ProgramScreen equipmentLevel={equipmentLevel} />}
-      {currentTab === "learn" && <LearnScreen />}
-      {currentTab === "progress" && <ProgressScreen progress={progress} />}
+      {currentTab === "program" && <ProgramScreen equipmentLevel={equipmentLevel} onShowLegal={setLegalPage} />}
+      {currentTab === "learn" && <LearnScreen onShowLegal={setLegalPage} />}
+      {currentTab === "progress" && <ProgressScreen progress={progress} onShowLegal={setLegalPage} />}
       <NavBar currentTab={currentTab} setCurrentTab={setCurrentTab} />
       {showEquipmentModal && <EquipmentModal equipmentLevel={equipmentLevel} setEquipmentLevel={setEquipmentLevel} onClose={() => setShowEquipmentModal(false)} />}
     </div>

@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <rect width="100" height="100" rx="20" fill="#2B3A2B"/>
+  <text x="50" y="40" text-anchor="middle" font-family="Arial Black, sans-serif" font-weight="900" font-size="28" fill="#F2EDE3" letter-spacing="1">D-L</text>
+  <line x1="25" y1="52" x2="75" y2="52" stroke="#F2EDE3" stroke-width="4" stroke-linecap="round"/>
+  <circle cx="22" cy="52" r="10" fill="none" stroke="#F2EDE3" stroke-width="3.5"/>
+  <circle cx="78" cy="52" r="10" fill="none" stroke="#F2EDE3" stroke-width="3.5"/>
+  <text x="50" y="82" text-anchor="middle" font-family="Arial, sans-serif" font-weight="700" font-size="10" fill="#7D7868" letter-spacing="3">DADLIFTS</text>
+</svg>
